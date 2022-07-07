@@ -1,0 +1,165 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : null,
+    "version" : "1.0.0",
+    "title" : null,
+    "termsOfService" : null,
+    "contact" : null,
+    "license" : null
+  },
+  "host" : "<jira-instance-name>.atlassian.net",
+  "basePath" : "/rest/api/3",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/project/search" : {
+      "get" : {
+        "tags" : [ "JiraGetProjects" ],
+        "summary" : null,
+        "description" : null,
+        "operationId" : "JiraGetProjects",
+        "produces" : [ "application/json" ],
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "maxResults",
+          "in" : "query",
+          "description" : "The maximum number of items to return per page.",
+          "required" : false,
+          "type" : "number",
+          "format" : "int32"
+        }, {
+          "name" : "orderBy",
+          "in" : "query",
+          "description" : "[Order](#ordering) the results by a field.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "action",
+          "in" : "query",
+          "description" : "Filter results by projects for which the user can view, browse or edit. Dfeualt is view",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "startAt",
+          "in" : "query",
+          "description" : "The index of the first item to return in a page of results (page offset).",
+          "required" : false,
+          "type" : "number",
+          "format" : "int32"
+        }, {
+          "name" : "query",
+          "in" : "query",
+          "description" : "Filter the results using a literal string. Projects with a matching key or name are returned (case insensitive)",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "typeKey",
+          "in" : "query",
+          "description" : "Orders results by the project type. This parameter accepts a comma-separated list. Valid values are business, service_desk, and software",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/JiraGetProjects"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "JiraGetProjects##values##avatarUrls" : {
+      "properties" : {
+        "48x48" : {
+          "type" : "string"
+        },
+        "24x24" : {
+          "type" : "string"
+        },
+        "16x16" : {
+          "type" : "string"
+        },
+        "32x32" : {
+          "type" : "string"
+        }
+      }
+    },
+    "JiraGetProjects##values" : {
+      "properties" : {
+        "expand" : {
+          "type" : "string"
+        },
+        "self" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "key" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "avatarUrls" : {
+          "$ref" : "#/definitions/JiraGetProjects##values##avatarUrls"
+        },
+        "projectTypeKey" : {
+          "type" : "string"
+        },
+        "simplified" : {
+          "type" : "boolean"
+        },
+        "style" : {
+          "type" : "string"
+        },
+        "isPrivate" : {
+          "type" : "boolean"
+        },
+        "properties" : {
+          "type" : "string"
+        },
+        "entityId" : {
+          "type" : "string"
+        },
+        "uuid" : {
+          "type" : "string"
+        }
+      }
+    },
+    "JiraGetProjects" : {
+      "properties" : {
+        "self" : {
+          "type" : "string"
+        },
+        "nextPage" : {
+          "type" : "string"
+        },
+        "maxResults" : {
+          "type" : "number",
+          "format" : "int32"
+        },
+        "startAt" : {
+          "type" : "number",
+          "format" : "int32"
+        },
+        "total" : {
+          "type" : "number",
+          "format" : "int32"
+        },
+        "isLast" : {
+          "type" : "boolean"
+        },
+        "values" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/JiraGetProjects##values"
+          }
+        }
+      }
+    }
+  }
+}
