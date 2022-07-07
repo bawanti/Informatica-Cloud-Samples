@@ -1,6 +1,8 @@
 # Informatica Cloud (CDI) Jira Integration using REST APIs
 
-This project contains set of re-usable Informatica Cloud (CDI) design assets to demonstarte how CDI REST V2 connection can be used to interact with Jira Cloud. Most of the use-cases can be implemented using out-of-box Jira CDI connector, but this method can be used if some objects or operations aren't avialble in the OOB connector.
+This project contains set of re-usable Informatica Cloud (CDI) design assets to demonstarte how CDI REST V2 connection can be used to interact with Jira Cloud. Most of the use-cases can be implemented using out-of-the-box Jira CDI connector, but this method can be used if some objects or operations aren't avialble in the OOB connector.
+
+[Click Here](https://docs.informatica.com/integration-cloud/cloud-data-integration-connectors/current-version/jira-cloud-connector/introduction-to-jira-cloud-connector/jira-cloud-connector-overview.html) to read the details about the native CDI Jira connector.
 
 This projects demonstrates how Jira Cloud REST APIs can be used to retrieve projects from Jira Cloud along with option for providing filtering conditions.
 
@@ -15,19 +17,19 @@ This projects demonstrates how Jira Cloud REST APIs can be used to retrieve proj
   - [Design Details](#design-details)
     - [Mapping: m_jira_getProjects_flatfile](#mapping:-m_jira_getProjects_flatfile)
     - [Mapping Task: m_jira_getProjects_flatfile](#mapping-task:-mct_jira_getProjects_flatfile) 
-  [Run Integration](#run-integrations)
+  - [Run Integration](#run-integrations)
   
 <!-- /TOC -->
 
 ## **Design Assets**
 
-Below are the list of assets, once imported please publish the assets in the same order as in the below table.
+Below are the list of design assets included in the this project.
 
 | Asset Name                        | Type                          | Description                                                                                                       |
 | ----------------------------------|-------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | JiraGetProjects_Swagger.json   | Swagger File             | Used by RESTV2 connector. Copy this file on the secure agent or a network file share and then provide the file path on the RESTV2 connection                                                                    |
-| FF_Tgt_Conn   | Flat File Connection                | Flat file connection used to write Jira results                                                         |
-| JiraGetProjects       | RESTV2 Connection                       | Rest Connection used to interact with Jira Cloud using APIs                                               |
+| FF_Tgt_Conn   | Flat File Connection                | Flat file connection used to write results from Jira Cloud API to flat files                                                         |
+| JiraGetProjects       | RESTV2 Connection                       | Rest Connection used to interact with Jira Cloud APIs                                               |
 | m_jira_getProjects_flatfile                  | Mapping                       | Mapping template with the business logic to connect to Jira Cloud and write to the flat file target                                                                    |
 | mct_jira_getProjects_flatfiles                 | Mapping Task                       | Mapping Task which can accept the query parameters and execute the integration                                                          |
 | SecureAgentGroup            | Runtime Environment                       | Target runtime environment                                                     |                                                  |
@@ -57,15 +59,16 @@ Create an API token from your Atlassian account:
 ![Image](./images/New%20APIToken.jpg)
 
 For further details about the Jira Cloud API Token [Click Here](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
+
 ### **Informatica Cloud Configurations**
 Instrcutions to import and setup Informatica Cloud designs.
-1. Update the Swagger file to use required Jira Cloud Instance "[jira-instance-name]". For example it will look something like "instance1-jira.atlassian.net" 
-2. Login into informatica Cloud and select Cloud Data Integration service and browse to Explore menu.
+1. Update the Swagger file to use your  Jira Cloud Instance "[jira-instance-name]". For example, a Jira Cloud instance name will look something like "instance1-jira.atlassian.net" 
+2. Login into informatica Cloud and select Cloud Data Integration service and go to Explore menu.
 3. Then click Import and select the downloaded JiraCloud-CDI-RESTv2.zip file
-4. Update the target project name if required if not updated assets will be imported into project named "JIRA".
-5. **FF_Tgt_Conn**: If you have an existing flat file connection you can map that connection if not it will new connection. Update the directory path on the connection if new connection is created.
+4. Update the target project name if required, if not design assets will be imported into project named "JIRA".
+5. **FF_Tgt_Conn**: If you have an existing flat file connection you can map that connection if not it will create new connection with the same name. Update the directory path on the connection if new connection is created.
 6. **JiraGetprojects**: REST V2 connection
-7. **SecureAgentGroup**: Pick rge correct runtime environment for you orgaznization
+7. **SecureAgentGroup**: Pick the correct runtime environment for you orgaznization
 8. Test and import the design assets.
 
 ![Screen shot for your reference below](./images/Import%20Assets.jpg)
@@ -75,7 +78,7 @@ Instrcutions to import and setup Informatica Cloud designs.
 ## **Design Details**
 
 ###  **Mapping**: m_jira_getProjects_flatfile
-Mapping Template which can retrieve projects using  Jira Cloud REST APIs. Integration uses paginated get projects API to retrieve the projects. Click this link all the details on the API. [Click Here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-search-get) 
+Mapping Template which can retrieve projects using  Jira Cloud REST APIs. Integration uses paginated get projects API to retrieve the projects. Click this link to get all the details on the API used. [Click Here](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/#api-rest-api-3-project-search-get) 
 
 Source transformation uses REST web-service to get the projects and supports following query parameters.
 | Name                  | Description                                                                                           |
@@ -88,9 +91,9 @@ Source transformation uses REST web-service to get the projects and supports fol
 
 ![Mapping Design](./images/Mapping.jpg)
 
-Pagination is handled using a parameter called **startAt**, this is used within Advannced properties in the source transformations. To determine the last API call for pagination Informatica Cloud uses "End of response expression" or "End Page", between the two attributes whichever happens first will stop the next API calls.
+Pagination is handled using a parameter called **startAt**, this is used within Advanced Properties under source transformation. To determine the last API call for pagination Informatica Cloud uses "End of response expression" or "End Page", between the two attributes whichever happens first will stop the next API calls.
 
-If you expect to retrieve huge number of records adjust the "End Page" attribute accordingly so that API calls do not stop before we retrieve all the records. **We need to make sure that "End of response expression" occurs before we hit "End Page"**.
+If you expect to retrieve huge number of records adjust the "End Page" parameter value (Default is 10,000) attribute accordingly so that API calls do not stop before we retrieve all the records. **We need to make sure that "End of response expression" occurs before we hit "End Page"**.
 
 ![Advanced Properties](./images/Source_Trans_Advanced.jpg)
 
@@ -102,10 +105,10 @@ Mapping Task can be used to set the query parameter as required and then execute
 
 ## **Run Integration Job**
 
-Open and click edit mapping task and then set the query parameters as required and run the mapping task.
+Open and click edit mapping task and then set the query parameters as required and click finish to Save changes. If no query parameters are changed default values will be used for the API call. 
 
 ![Mapping Task Configuration](./images/MCT%20Config.jpg)
 
-Save and run the mapping task. You can check results from the "My Jobs" or "Montor" Service.
+Run the mapping task and you can check results from the "My Jobs" or "Montor" Service.
 
 ![Monitor Job Results](./images/Job%20Monitor.jpg)
