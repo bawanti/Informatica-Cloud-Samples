@@ -32,7 +32,7 @@ Below are the list of assets, once imported please publish the assets in the sam
 | mct_jira_getProjects_flatfiles                 | Mapping Task                       | Mapping Task which can accept the query parameters and execute the integration                                                          |
 | SecureAgentGroup            | Runtime Environment                       | Target runtime environment                                                     |                                                  |
 
-[Exported Assets](./images/Exported-Assets.jpg)
+![Exported Assets](./images/Exported-Assets.jpg)
 
 ## **Download Design Assets**
 
@@ -54,7 +54,7 @@ Create an API token from your Atlassian account:
   3. From the dialog that appears, enter a memorable and concise Label for your token and click Create.
   4. Click Copy to clipboard, then paste the token to your script, or elsewhere to save:
 
-[Image](./images/New%20APIToken.jpg)
+![Image](./images/New%20APIToken.jpg)
 
 For further details about the Jira Cloud API Token [Click Here](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
 ### **Informatica Cloud Configurations**
@@ -68,7 +68,7 @@ Instrcutions to import and setup Informatica Cloud designs.
 7. **SecureAgentGroup**: Pick rge correct runtime environment for you orgaznization
 8. Test and import the design assets.
 
-[Screen shot for your reference below](./images/Import%20Assets.jpg)
+![Screen shot for your reference below](./images/Import%20Assets.jpg)
 
 9. Once successfully imported review JiraGetprojects RESTV2 connection and make sure that path provided for the Swagger file matches the file location where you have the updated swagger file.
 
@@ -86,26 +86,26 @@ Source transformation uses REST web-service to get the projects and supports fol
 | query                | Filter the results using a literal string. Projects with a matching key or name are returned (case insensitive).	                       |
 | typeKey                | Orders results by the project type. This parameter accepts a comma-separated list. Valid values are business, service_desk, and software. |
 
-[Mapping Design](./images/Mapping.jpg)
+![Mapping Design](./images/Mapping.jpg)
 
 Pagination is handled using a parameter called **startAt**, this is used within Advannced properties in the source transformations. To determine the last API call for pagination Informatica Cloud uses "End of response expression" or "End Page", between the two attributes whichever happens first will stop the next API calls.
 
 If you expect to retrieve huge number of records adjust the "End Page" attribute accordingly so that API calls do not stop before we retrieve all the records. **We need to make sure that "End of response expression" occurs before we hit "End Page"**.
 
-[Advanced Properties](./images/Source_Trans_Advanced.jpg)
+![Advanced Properties](./images/Source_Trans_Advanced.jpg)
 
 ###  **Mapping Task**: mct_jira_getProjects_flatfile
 
 Mapping Task can be used to set the query parameter as required and then execute the integration job to retrieve projects from Jira Cloud. Same mapping task can be exceuted multiple times with different set of query parameter values.
 
-[Mapping Task Design](./images/MappingTask.jpg)
+![Mapping Task Design](./images/MappingTask.jpg)
 
-## **Run Integrations**
+## **Run Integration Job**
 
 Open and click edit mapping task and then set the query parameters as required and run the mapping task.
 
-[Mapping Task Configuration](./images/MCT%20Config.jpg)
+![Mapping Task Configuration](./images/MCT%20Config.jpg)
 
 Save and run the mapping task. You can check results from the "My Jobs" or "Montor" Service.
 
-[Monitor Job Results](./images/Job%20Monitor.jpg)
+![Monitor Job Results](./images/Job%20Monitor.jpg)
