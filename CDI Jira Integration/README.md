@@ -48,7 +48,7 @@ Use following links to download the designs assets.
 ### **Jira Configurations**
 Jira Cloud no longer supports basic authentication with username & password, instead we need to use either API Token or OAuth.
 
-If you already have an API token or OAuth details skip this section if not use these instructions generate API token required.
+If you already have an API token or OAuth details skip this section if not use below instructions to generate a new API token.
 
 Create an API token from your Atlassian account:
   1. Log in to https://id.atlassian.com/manage-profile/security/api-tokens
@@ -61,9 +61,9 @@ Create an API token from your Atlassian account:
 For further details about the Jira Cloud API Token [Click Here](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
 
 ### **Informatica Cloud Configurations**
-Instrcutions to import and setup Informatica Cloud designs.
+Instructions to import and setup Informatica Cloud designs.
 1. Update the Swagger file to use your  Jira Cloud Instance "[jira-instance-name]". For example, a Jira Cloud instance name will look something like "instance1-jira.atlassian.net" 
-2. Login into informatica Cloud and select Cloud Data Integration service and go to Explore menu.
+2. Login into Informatica Cloud and select Cloud Data Integration service and go to Explore menu.
 3. Then click Import and select the downloaded JiraCloud-CDI-RESTv2.zip file
 4. Update the target project name if required, if not design assets will be imported into project named "JIRA".
 5. **FF_Tgt_Conn**: If you have an existing flat file connection you can map that connection if not it will create new connection with the same name. Update the directory path on the connection if new connection is created.
@@ -73,8 +73,16 @@ Instrcutions to import and setup Informatica Cloud designs.
 
 ![Screen shot for your reference below](./images/Import%20Assets.jpg)
 
-9. Once successfully imported review JiraGetprojects RESTV2 connection and make sure that path provided for the Swagger file matches the file location where you have the updated swagger file.
+9. Once all design assets are successfully imported, from the Administrator Service review JiraGetprojects RESTV2 connection
+    1. Authentication Type = Basic
+    2. Provide Auth User Id (Jira user)
+    3. Provide Auth Password = API Token Generated from Jira
+    4. Update Swagger file path as needed
+    5. Test and Save Connection Configurations
+    
+    ![RestV2 Connection Configurations](./images/RestV2_Conn.jpg)  
 
+Alternatively if you have setup an OAuth connectivity for Jira Cloud you can provide the OAuth details(Consumer Key. Consumer Secret) by changing the Auth Type to OAuth.
 ## **Design Details**
 
 ###  **Mapping**: m_jira_getProjects_flatfile
