@@ -1,6 +1,6 @@
 # Informatica Cloud (CDI) Jira Integration using REST APIs
 
-This project contains set of re-usable Informatica Cloud (CDI) design assets to demonstarte how CDI REST V2 connection can be used to interact with Jira Cloud. Most of the use-cases can be implemented using out-of-the-box Jira CDI connector, but this method can be used if some objects or operations aren't avialble in the OOB connector.
+This project contains set of re-usable Informatica Cloud (CDI) design assets to demonstrate how CDI REST V2 connection can be used to interact with Jira Cloud. Most of the use-cases can be implemented using out-of-the-box Jira CDI connector, but this method can be used if some objects or operations aren't available in the OOB connector.
 
 [Click Here](https://docs.informatica.com/integration-cloud/cloud-data-integration-connectors/current-version/jira-cloud-connector/introduction-to-jira-cloud-connector/jira-cloud-connector-overview.html) to read the details about the native CDI Jira connector.
 
@@ -48,7 +48,7 @@ Use following links to download the designs assets.
 ### **Jira Configurations**
 Jira Cloud no longer supports basic authentication with username & password, instead we need to use either API Token or OAuth.
 
-If you already have an API token or OAuth details skip this section if not use these instrcutions generate API token required.
+If you already have an API token or OAuth details skip this section if not use these instructions generate API token required.
 
 Create an API token from your Atlassian account:
   1. Log in to https://id.atlassian.com/manage-profile/security/api-tokens
@@ -68,7 +68,7 @@ Instrcutions to import and setup Informatica Cloud designs.
 4. Update the target project name if required, if not design assets will be imported into project named "JIRA".
 5. **FF_Tgt_Conn**: If you have an existing flat file connection you can map that connection if not it will create new connection with the same name. Update the directory path on the connection if new connection is created.
 6. **JiraGetprojects**: REST V2 connection
-7. **SecureAgentGroup**: Pick the correct runtime environment for you orgaznization
+7. **SecureAgentGroup**: Pick the correct runtime environment for you organization
 8. Test and import the design assets.
 
 ![Screen shot for your reference below](./images/Import%20Assets.jpg)
@@ -99,7 +99,7 @@ If you expect to retrieve huge number of records adjust the "End Page" parameter
 
 ###  **Mapping Task**: mct_jira_getProjects_flatfile
 
-Mapping Task can be used to set the query parameter as required and then execute the integration job to retrieve projects from Jira Cloud. Same mapping task can be exceuted multiple times with different set of query parameter values.
+Mapping Task can be used to set the query parameter as required and then execute the integration job to retrieve projects from Jira Cloud. Same mapping task can be executed multiple times with different set of query parameter values.
 
 ![Mapping Task Design](./images/MappingTask.jpg)
 
@@ -109,6 +109,6 @@ Open and click edit mapping task and then set the query parameters as required a
 
 ![Mapping Task Configuration](./images/MCT%20Config.jpg)
 
-Run the mapping task and you can check results from the "My Jobs" or "Montor" Service.
+Run the mapping task and you can check results from the "My Jobs" or "Monitor" Service.
 
 ![Monitor Job Results](./images/Job%20Monitor.jpg)
